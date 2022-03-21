@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>  
+    <div class="texte">
+        <h1>Streaming Platform</h1>
+    </div> 
+    <script src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
+    <div class="video">
+        <video id=example-video width=960 height=540 class="video-js vjs-default-skin" controls>
+            <source
+                src="http://ip.de.votre.machine/hls/test.m3u8" #Ligne à modifier
+                type="application/x-mpegURL">
+        </video>
+    </div>
+    <script>
+    var player = videojs('example-video');
+    player.play();
+    </script>
+</body>
+</html>
