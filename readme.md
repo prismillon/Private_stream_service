@@ -42,7 +42,7 @@ Maintenant que nginx est correctement configuré, il faut recharger la configura
 sudo systemctl reload nginx.service
 ```
 
-Maintenant vous avez besoin de deux ports pour faire marcher votre service, le port 80 pour le moment pour le http et un port pour le rtmp qui part défaut est 1935, il va falloir ouvrir ces ports pour pouvoir y acceder depuis l'exterieur.
+Ensuite vous avez besoin de deux ports pour faire marcher votre service, le port 80 pour le moment pour le http et un port pour le rtmp qui part défaut est 1935, il va falloir ouvrir ces ports pour pouvoir y acceder depuis l'exterieur.
 
 Pour Ubuntu server si votre firewall est actif il faudra faire la commande 
 
@@ -51,10 +51,14 @@ sudo ufw allow 80/tcp
 ```
 pour le port 80 et celui choisi pour le flux rtmp
 
-Maintenant il va falloir faire une page web qui va afficher notre stream
+Enfin il va falloir faire une page web qui va afficher notre stream
 
 voici un exemple possible, attention il faut remplacer par l'ip de votre machine pour acceder au fichier vidéo à afficher
 ```
 sudo vim /var/www/html/index.html
 ```
 voici un [exemple](./index.html) de lecteur vidéo
+
+Une fois tout cela réalisé votre service de streaming personnel est pret a l'emplois, vous pouvez via un logiciel de stream comme OBS envoyer votre flux a l'adresse ``rtmp://votre.ip.ici:port/live`` avec comme clé de stream ``test``
+
+pour plus de précision, ``/live`` est le nom de l'application dans la configuration nginx, et la clé de stream ``test`` est le nom a faire correspondre dans la configuration de la page html, biensur tout cela est à changer pour plus de sécurité.
