@@ -22,7 +22,6 @@ sudo vim /etc/nginx/nginx.conf
 ```
 Il faudra y inserer la [configuration nginx](./nginx.conf)
 
-#
 Preview :
 ```
 [...]
@@ -35,7 +34,7 @@ rtmp {
 
 [...]
 ```
-#
+
 Maintenant que nginx est correctement configuré, il faut recharger la configuration pour appliquer les changements
 
 ```
@@ -59,6 +58,37 @@ sudo vim /var/www/html/index.html
 ```
 voici un [exemple](./index.html) de lecteur vidéo
 
+pour activer l'https il va falloir utiliser certbot :
+```
+sudo apt install certbot
+```
+```
+sudo certbot certonly --standalone -d votre.dns.ici
+```
+il faudra ensuite remplacer ``listen 80`` par :
+```
+listen         443 ssl;
+server_name    votre.dns.ici;
+
+ssl_certificate /etc/letsencrypt/live/votre.dns.ici/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/votre.dns.ici/privkey.pem;
+ssl_protocols TLSv1.2;
+ssl_ciphers HIGH:!aNULL:!MD5;
+```
+
+## Utilisation :
+
 Une fois tout cela réalisé votre service de streaming personnel est pret a l'emplois, vous pouvez via un logiciel de stream comme OBS envoyer votre flux a l'adresse ``rtmp://votre.ip.ici:port/live`` avec comme clé de stream ``test``
 
 pour plus de précision, ``/live`` est le nom de l'application dans la configuration nginx, et la clé de stream ``test`` est le nom a faire correspondre dans la configuration de la page html, biensur tout cela est à changer pour plus de sécurité.
+
+Les utilisateurs peuvent maintenant se rendre sur la page web pour voir le stream
+
+## Monitoring :
+
+Vous pouvez installer ``netdata`` via :
+
+```
+sudo apt install netdata
+```
+vous aurez donc un panel de monitoring a l'adresse http://votre.ip:19999
